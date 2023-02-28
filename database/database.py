@@ -1,5 +1,3 @@
-from abc import ABCMeta
-
 from sqlalchemy import Integer, Column, select
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.ext.declarative import declared_attr
