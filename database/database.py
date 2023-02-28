@@ -32,7 +32,12 @@ class TableBase:
 
     @declared_attr
     def __tablename__(cls) -> str:
-        return cls.__name__.lower() + 's'
+        name: str = cls.__name__.lower()
+        if name.endswith('y'):
+            return name[:-1] + 'ies'
+        if any([name.endswith(i) for i in ('s', 'ss', 'sh', 'ch', 'x', 'z')]):
+            return name + 'es'
+        return name + 's'
 
 
 Base = declarative_base(cls=TableBase)
@@ -56,8 +61,11 @@ class AsyncDatabaseSession:
 
     async def create_all(self):
         async with self._engine.begin() as conn:
-            # await conn.run_sync(Base.metadata.drop_all)
             await conn.run_sync(Base.metadata.create_all)
+
+    async def drop_all(self):
+        async with self._engine.begin() as conn:
+            await conn.run_sync(Base.metadata.drop_all)
 
 
 db = AsyncDatabaseSession()

@@ -11,6 +11,7 @@ logging.basicConfig(level=logging.INFO)
 
 async def on_startup(*args, **kwargs):
     db.init()
+    await db.drop_all()
     await db.create_all()
 
 
