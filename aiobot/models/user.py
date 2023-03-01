@@ -20,7 +20,7 @@ class User(Base):
 
     @classmethod
     async def create(cls, user_id, **kwargs):
-        user = cls(user_id=user_id, **kwargs)
+        user = cls(user_id=user_id, **kwargs)  # noqa
         db.add(user)
         await cls.commit()
         return user

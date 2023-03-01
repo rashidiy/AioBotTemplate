@@ -1,7 +1,7 @@
 from aiogram.types import Message
 
-from database import User
-from dispatcher import dis
+from aiobot.models import User
+from aiobot.dispatcher import dis
 
 
 @dis.message_handler(commands=['start'])
