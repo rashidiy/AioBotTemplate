@@ -3,8 +3,7 @@ import logging
 from aiogram.utils import executor
 
 from database import db
-from dispatcher import dis
-from aiobot import *
+import aiobot
 
 logging.basicConfig(level=logging.INFO)
 
@@ -16,4 +15,4 @@ async def on_startup(*args, **kwargs):
 
 
 if __name__ == '__main__':
-    executor.start_polling(dis, on_startup=on_startup, skip_updates=True)
+    executor.start_polling(aiobot.dis, on_startup=on_startup, skip_updates=True)
